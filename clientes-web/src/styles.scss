@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Gilroy';
+    font-style: normal;
+    src: url('/assets/fonts/Gilroy/Gilroy-Medium.otf');
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Gilroy';
+}

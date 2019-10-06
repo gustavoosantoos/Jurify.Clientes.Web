@@ -1,0 +1,29 @@
+.container {
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+header {
+    .toolbar {
+        width: 100%;
+
+        .content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img.logo {
+                width: 120px;
+            }
+
+            a {
+                font-family: 'Gilroy';
+                font-size: 18px;
+                color: #4c5a98;
+                text-decoration: none;
+            }
+        }
+    }
+}
