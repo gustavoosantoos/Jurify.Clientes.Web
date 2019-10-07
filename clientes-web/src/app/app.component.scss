@@ -19,6 +19,24 @@ header {
                 width: 120px;
             }
 
+            .menu-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .menu {
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-right: 15px;
+
+                    &:after {
+                        content: "|";
+                        margin-left: 15px;
+                    }
+                }
+            }
+
             a {
                 font-family: 'Gilroy';
                 font-size: 18px;
