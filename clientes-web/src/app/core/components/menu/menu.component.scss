@@ -1,0 +1,42 @@
+header {
+    .toolbar {
+        width: 100%;
+        padding: 15px 0;
+
+        .content {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img.logo {
+                width: 120px;
+            }
+
+            .menu-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .menu {
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-right: 15px;
+
+                    &:after {
+                        content: "|";
+                        margin-left: 15px;
+                    }
+                }
+            }
+
+            a {
+                font-family: 'Gilroy';
+                font-size: 18px;
+                color: #4c5a98;
+                text-decoration: none;
+            }
+        }
+    }
+}
