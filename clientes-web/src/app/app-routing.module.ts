@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/busca-advogado', pathMatch: 'full' },
-  { path: 'busca-advogado', loadChildren: () => import('./modules/busca/busca.module').then(m => m.BuscaModule) }
+  { path: '', redirectTo: '/busca/busca-advogado', pathMatch: 'full' },
+  { path: 'busca', loadChildren: () => import('./modules/busca/busca.module').then(m => m.BuscaModule) }
 ];
 
 @NgModule({
