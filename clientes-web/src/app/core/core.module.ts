@@ -8,6 +8,9 @@ import { MenuComponent } from './components/menu/menu.component';
   declarations: [MenuComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    MenuComponent
   ]
 })
 export class CoreModule { }
