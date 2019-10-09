@@ -12,4 +12,9 @@ export class ResultadosComponent implements OnInit {
   ngOnInit() {
   }
 
+  showButtons() {
+    let filterButtons = document.querySelector('.filter-buttons');
+    filterButtons.classList.toggle('show');
+  }
+
 }

@@ -1,0 +1,44 @@
+.filter-menu {
+    padding: 10px 0;
+    background-color: #4c5a98;
+
+    .filter-content {
+        width: 100%;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: flex-end;
+
+        .filter-buttons {
+            width: 90%;
+            display: flex;
+            justify-content: flex-end;
+            transform: translateX(100%);
+            transition: .5s;
+
+            &.show {
+                transform-origin: right;
+                transform: translateX(0%);
+            }
+
+            button {
+                color: #fff;
+                transition: .5s;
+            }
+        }
+
+        button.filter-menu-btn {
+            color: #fff;
+            display: block;
+            margin-left: auto;
+        }
+    }
+}
+
+.mapa {
+    width: 100%;
+    margin-top: 100px;
+
+    iframe {
+        width: 100%;
+    }
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatBottomSheetModule, MatMenuModule, MatSliderModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
+    MatSliderModule,
     FormsModule,
     HttpClientModule
   ],
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
+    MatSliderModule,
     FormsModule,
     HttpClientModule
   ]
