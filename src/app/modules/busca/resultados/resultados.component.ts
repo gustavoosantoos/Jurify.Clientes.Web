@@ -17,6 +17,8 @@ export class ResultadosComponent implements OnInit {
     this.maps.initialize(InlogMaps.MapType.Google, {
       apiKey: 'AIzaSyCL-6vOejsS5QLc6_XI8qlvjnr6f5m6-d8',
       gestureHandling: false
+    }).then(() => {
+      // adicionar carregamentos e eventos do mapa aqui
     });
   }
 
