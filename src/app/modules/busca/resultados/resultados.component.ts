@@ -19,6 +19,23 @@ export class ResultadosComponent implements OnInit {
       gestureHandling: false
     }).then(() => {
       // adicionar carregamentos e eventos do mapa aqui
+      this.maps.drawMarker('marker1', {
+        icon: new InlogMaps.MarkerIcon('/assets/images/owl-red-marker.svg', [30, 30]),
+        latlng: [-25.441105, -49.276855],
+        addToMap: true
+      });
+      
+      this.maps.drawMarker('marker2', {
+        icon: new InlogMaps.MarkerIcon('/assets/images/owl-red-marker.svg', [30, 30]),
+        latlng: [-25.461105, -49.226855],
+        addToMap: true
+      });
+      
+      this.maps.drawMarker('marker2', {
+        icon: new InlogMaps.MarkerIcon('/assets/images/owl-red-marker.svg', [30, 30]),
+        latlng: [-25.421105, -49.306855],
+        addToMap: true
+      });
     });
   }
 
