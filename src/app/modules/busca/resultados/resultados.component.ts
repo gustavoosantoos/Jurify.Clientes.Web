@@ -40,7 +40,10 @@ export class ResultadosComponent implements OnInit {
     this.maps.drawMarker(escritorio.codigo, {
       addToMap: true,
       latlng: [escritorio.latitude, escritorio.longitude],
-      icon: new InlogMaps.MarkerIcon('assets/images/owl-red-marker.svg', [30, 30]),
+      icon: new InlogMaps.MarkerIcon('assets/images/owl-red-marker.svg'),
+      addClusterer: false,
+      fitBounds: false,
+      draggable: false
     });
   }
 
@@ -53,20 +56,20 @@ export class ResultadosComponent implements OnInit {
   adicionarHoverMarker(escritorio: Escritorio) {
     this.maps.addMarkerEvent(escritorio.codigo, InlogMaps.MarkerEventType.MouseOver, () => {
       // TO-DO: Corrigir problema de posição do Popup a partir da segunda exibição
-      this.maps.drawPopup(`popup-${escritorio.codigo}`, {
+      this.maps.drawPopup(escritorio.codigo, {
         latlng: [escritorio.latitude, escritorio.longitude],
         marker: escritorio.codigo,
         content: `<strong>Escritório:</strong> ${escritorio.razaoSocial} <br/>${escritorio.endereco}`
       });
 
-      this.maps.removeMarkerEvent(escritorio.codigo, InlogMaps.MarkerEventType.MouseOver);
+      //this.maps.removeMarkerEvent(escritorio.codigo, InlogMaps.MarkerEventType.MouseOver);
     });
   }
 
   adicionarOutMarker(escritorio: Escritorio) {
     this.maps.addMarkerEvent(escritorio.codigo, InlogMaps.MarkerEventType.MouseOut, () => {
-      this.maps.closePopup(`popup-${escritorio.codigo}`);
-      this.adicionarHoverMarker(escritorio);
+      this.maps.closePopup(escritorio.codigo);
+      // this.adicionarHoverMarker(escritorio);
     });
   }
 
