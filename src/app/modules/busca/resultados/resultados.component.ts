@@ -10,6 +10,7 @@ import * as InlogMaps from '@inlog/inlog-maps/lib';
   styleUrls: ['./resultados.component.scss']
 })
 export class ResultadosComponent implements OnInit {
+  private tipoMapa: InlogMaps.MapType = InlogMaps.MapType.Google;
   private maps: InlogMaps.Map;
   private escritorios: Escritorio[];
 
@@ -19,7 +20,7 @@ export class ResultadosComponent implements OnInit {
 
   ngOnInit() {
     this.maps = new InlogMaps.Map();
-    this.maps.initialize(InlogMaps.MapType.Google, {
+    this.maps.initialize(this.tipoMapa, {
       apiKey: 'AIzaSyCL-6vOejsS5QLc6_XI8qlvjnr6f5m6-d8',
       gestureHandling: false
     }).then(() => {
@@ -37,10 +38,15 @@ export class ResultadosComponent implements OnInit {
   }
 
   plotarMarcadorEscritorio(escritorio: Escritorio) {
+    const icon = new InlogMaps.MarkerIcon(
+      'assets/images/owl-red-marker.svg',
+      this.tipoMapa == InlogMaps.MapType.Leaflet ? [30, 30] : null
+    );
+
     this.maps.drawMarker(escritorio.codigo, {
       addToMap: true,
       latlng: [escritorio.latitude, escritorio.longitude],
-      icon: new InlogMaps.MarkerIcon('assets/images/owl-red-marker.svg'),
+      icon: icon,
       addClusterer: false,
       fitBounds: false,
       draggable: false

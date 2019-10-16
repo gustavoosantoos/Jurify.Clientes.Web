@@ -37,6 +37,10 @@
 .mapa {
     width: 100vw;
     margin-top: 0px;
+     
+    .map {
+        height: calc(100vh - 143px);
+    }
 
     iframe {
         width: 100%;
