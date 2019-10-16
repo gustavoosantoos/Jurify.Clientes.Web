@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  autenticadorApi: 'http://jurify-autenticador.azurewebsites.net/api/'
 };
