@@ -18,8 +18,25 @@
         </div>
     </div>
 </div>
-
-    <!--Maps aqui-->
 <div class="mapa">
     <div class="map" id="inlog-map"></div>
 </div>
+
+<ng-template #templateEscritorio>
+    <h1 mat-dialog-title>{{ escritorioSelecionado.razaoSocial }}</h1>
+    <div mat-dialog-content>
+        <p><strong>Endereço: </strong>{{ escritorioSelecionado.endereco }}</p>
+        <div>
+            <strong>Especialidades:</strong>
+            <ul>
+                <li>Civil</li>
+                <li>Trabalhista</li>
+                <li>Direito do Consumidor</li>
+            </ul>
+        </div>
+    </div>
+    <div mat-dialog-actions class="actions-container">
+        <button mat-button (click)="fecharModalEscritorio()">Fechar</button>
+        <button mat-button color="accent" (click)="abrirModalContatoEscritorio()" cdkFocusInitial>Enviar Mensagem</button>
+    </div>
+</ng-template>
