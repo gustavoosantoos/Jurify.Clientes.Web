@@ -4,6 +4,7 @@ import { ClientesService } from './../../../shared/services/clientes.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import * as InlogMaps from '@inlog/inlog-maps/lib';
 import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultados',
@@ -19,17 +20,32 @@ export class ResultadosComponent implements OnInit {
   @ViewChild('templateEscritorio', { static: true })
   templateEscritorio: TemplateRef<any>;
 
+  @ViewChild('templateMensagemEscritorio', { static: true })
+  templateMensagem: TemplateRef<any>;
+
   constructor(
     private clientesService: ClientesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    const lat = this.activatedRoute.snapshot.params.latitude;
+    const lng = this.activatedRoute.snapshot.params.longitude;
+
+    if (!lat || !lng) {
+      this.router.navigateByUrl('/busca/busca-advogados');
+      return;
+    }
+
     this.maps = new InlogMaps.Map();
     this.maps.initialize(this.tipoMapa, {
       apiKey: 'AIzaSyCL-6vOejsS5QLc6_XI8qlvjnr6f5m6-d8',
       gestureHandling: false
     }).then(() => {
+      this.maps.setCenter([lat, lng]);
+      this.maps.setZoom(12);
       this.clientesService.obterEscritorios().subscribe(r => {
         this.escritorios = r;
         this.escritorios.forEach(e => {
@@ -43,7 +59,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   plotarMarcadorEscritorio(escritorio: Escritorio): void {
-    const icon = new InlogMaps.MarkerIcon(
+    const icone = new InlogMaps.MarkerIcon(
       'assets/images/owl-red-marker.svg',
       this.tipoMapa === InlogMaps.MapType.Leaflet ? [30, 30] : null
     );
@@ -51,7 +67,7 @@ export class ResultadosComponent implements OnInit {
     this.maps.drawMarker(escritorio.codigo, {
       addToMap: true,
       latlng: [escritorio.latitude, escritorio.longitude],
-      icon: icon,
+      icon: icone,
       addClusterer: false,
       fitBounds: false,
       draggable: false
@@ -87,6 +103,15 @@ export class ResultadosComponent implements OnInit {
   }
 
   abrirModalContatoEscritorio(): void {
+    this.fecharModalEscritorio();
+    this.dialog.open(this.templateMensagem);
+  }
+
+  fecharModalMensagem(): void {
+    this.dialog.closeAll();
+  }
+
+  enviarMensagemEscritorio(): void {
 
   }
 

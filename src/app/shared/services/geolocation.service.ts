@@ -11,10 +11,13 @@ export class GeolocationService {
     private http: HttpClient
   ) { }
 
-  public  getAddress(lat, long): Observable<Object> {
+  public getAddress(lat, long): Observable<any> {
     const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + long + '&key=AIzaSyCL-6vOejsS5QLc6_XI8qlvjnr6f5m6-d8&language=pt-BR';
+    return this.http.get<any>(url);
+  }
 
-    const resp = this.http.get(url);
-    return resp;
+  public getCoordinates(address: string): Observable<any> {
+    const url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyCL-6vOejsS5QLc6_XI8qlvjnr6f5m6-d8&language=pt-BR';
+    return this.http.get<any>(url);
   }
 }

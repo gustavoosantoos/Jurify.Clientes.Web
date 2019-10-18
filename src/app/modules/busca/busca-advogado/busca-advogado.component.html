@@ -8,7 +8,7 @@
                 <mat-form-field>
                     <input type="text" name="busca" matInput [(ngModel)]="address" placeholder="Digite seu endereço">
                 </mat-form-field>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="buscarEndereco()">
                     <mat-icon>search</mat-icon>
                 </button>
             </form>

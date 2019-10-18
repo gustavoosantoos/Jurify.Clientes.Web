@@ -7,7 +7,7 @@ import { ResultadosComponent } from './resultados/resultados.component';
 const routes: Routes = [
   { path: '', redirectTo: 'busca-advogado', pathMatch: 'full' },
   { path: 'busca-advogado', component: BuscaAdvogadoComponent },
-  { path: 'resultados', component: ResultadosComponent }
+  { path: 'resultados/:latitude/:longitude', component: ResultadosComponent }
 ];
 
 @NgModule({
