@@ -2,6 +2,13 @@
     width: 100%;
 }
 
+.filter-buttons-left {
+    float: left;
+    button {
+        color: #fff;
+    }
+}
+
 .filter-menu {
     padding: 10px 0;
     background-color: #4c5a98;

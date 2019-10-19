@@ -29,6 +29,9 @@ export class ResultadosComponent implements OnInit {
   @ViewChild('templateMensagemEscritorio', { static: true })
   templateMensagem: TemplateRef<any>;
 
+  @ViewChild('templateCasoJuridico', { static: true })
+  templateCasoJuridico: TemplateRef<any>;
+
   constructor(
     private clientesService: ClientesService,
     private dialog: MatDialog,
@@ -167,6 +170,10 @@ export class ResultadosComponent implements OnInit {
     }
 
     return true;
+  }
+
+  abrirModalCadastroCasoJuridico(): void {
+
   }
 
   showButtons(): void {
