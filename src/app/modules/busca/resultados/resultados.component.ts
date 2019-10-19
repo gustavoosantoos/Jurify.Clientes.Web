@@ -3,8 +3,9 @@ import { Escritorio } from './../../../shared/models/escritorio.model';
 import { ClientesService } from './../../../shared/services/clientes.service';
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import * as InlogMaps from '@inlog/inlog-maps/lib';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NovaMensagem } from 'src/app/shared/models/nova-mensagem.model';
 
 @Component({
   selector: 'app-resultados',
@@ -17,6 +18,11 @@ export class ResultadosComponent implements OnInit {
   protected escritorios: Escritorio[];
   protected escritorioSelecionado: Escritorio;
 
+  protected novaMensagemNome: string;
+  protected novaMensagemCpf: string;
+  protected novaMensagemContato: string;
+  protected novaMensagemTexto: string;
+
   @ViewChild('templateEscritorio', { static: true })
   templateEscritorio: TemplateRef<any>;
 
@@ -27,12 +33,13 @@ export class ResultadosComponent implements OnInit {
     private clientesService: ClientesService,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    const lat = this.activatedRoute.snapshot.params.latitude;
-    const lng = this.activatedRoute.snapshot.params.longitude;
+    const lat = Number.parseFloat(this.activatedRoute.snapshot.params.latitude);
+    const lng = Number.parseFloat(this.activatedRoute.snapshot.params.longitude);
 
     if (!lat || !lng) {
       this.router.navigateByUrl('/busca/busca-advogados');
@@ -46,6 +53,8 @@ export class ResultadosComponent implements OnInit {
     }).then(() => {
       this.maps.setCenter([lat, lng]);
       this.maps.setZoom(12);
+      this.plotarMarcadorUsuario([lat, lng]);
+
       this.clientesService.obterEscritorios().subscribe(r => {
         this.escritorios = r;
         this.escritorios.forEach(e => {
@@ -55,6 +64,27 @@ export class ResultadosComponent implements OnInit {
           this.adicionarOutMarker(e);
         });
       });
+    });
+  }
+
+  plotarMarcadorUsuario(coordenadas: number[]): void {
+    this.maps.drawMarker('usuario', {
+      addToMap: true,
+      draggable: false,
+      latlng: coordenadas,
+      icon: new InlogMaps.MarkerIcon('assets/images/male-user.svg')
+    });
+
+    this.maps.addMarkerEvent('usuario', InlogMaps.MarkerEventType.MouseOver, () => {
+      this.maps.drawPopup('usuario', {
+        content: '<strong>Sua posição aproximada</strong>',
+        latlng: coordenadas,
+        marker: 'usuario'
+      });
+    });
+
+    this.maps.addMarkerEvent('usuario', InlogMaps.MarkerEventType.MouseOut, () => {
+      this.maps.closePopup('usuario');
     });
   }
 
@@ -112,7 +142,31 @@ export class ResultadosComponent implements OnInit {
   }
 
   enviarMensagemEscritorio(): void {
+    if (!this.validarFormularioNovaMensagem()) {
+      this.snackBar.open('Preencha todos os campos do formulário', 'Fechar');
+      return;
+    }
 
+    const novaMensagem: NovaMensagem = {
+      nome: this.novaMensagemNome,
+      cpf: this.novaMensagemCpf,
+      contato: this.novaMensagemContato,
+      mensagem: this.novaMensagemTexto
+    };
+
+    this.clientesService.enviarMensagemEscritorio(this.escritorioSelecionado, novaMensagem).subscribe(r => {
+      this.snackBar.open('Mensagem enviada com sucesso, aguarde o contato do escritório.', 'Fechar');
+    }, err => {
+      this.snackBar.open('Falha ao enviar mensagem, tente novamente.', 'Fechar');
+    });
+  }
+
+  validarFormularioNovaMensagem(): boolean {
+    if (!this.novaMensagemNome || !this.novaMensagemCpf || !this.novaMensagemContato || !this.novaMensagemTexto) {
+      return false;
+    }
+
+    return true;
   }
 
   showButtons(): void {

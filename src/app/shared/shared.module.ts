@@ -5,14 +5,16 @@ import {
   MatInputModule,
   MatButtonModule,
   MatIconModule,
-  MatBottomSheetModule,
   MatMenuModule,
   MatSliderModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {NgxMaskModule, IConfig} from 'ngx-mask';
 
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [],
@@ -26,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     MatDialogModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(options),
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     FormsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxMaskModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }
