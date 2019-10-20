@@ -82,7 +82,7 @@
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input matInput name="contato" placeholder="Telefone de contato" mask="(00) 00000-0000" [(ngModel)]="novaMensagemContato" required>
+                <input matInput name="contato" type="email" placeholder="E-mail de contato" [(ngModel)]="novaMensagemContato" required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -90,7 +90,7 @@
             </mat-form-field>
         </div>
         <div mat-dialog-actions class="actions-container">
-            <button mat-button (click)="fecharModalMensagem()">Fechar</button>
+            <button mat-button (click)="fecharModalMensagem()" type="button">Fechar</button>
             <button mat-button color="accent" type="submit">Enviar Mensagem</button>
         </div>
     </form>

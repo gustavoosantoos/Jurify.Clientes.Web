@@ -161,6 +161,8 @@ export class ResultadosComponent implements OnInit {
       this.snackBar.open('Mensagem enviada com sucesso, aguarde o contato do escritório.', 'Fechar');
     }, err => {
       this.snackBar.open('Falha ao enviar mensagem, tente novamente.', 'Fechar');
+    }, () => {
+      this.dialog.closeAll();
     });
   }
 

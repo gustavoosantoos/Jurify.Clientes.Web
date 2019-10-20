@@ -18,7 +18,7 @@ export class ClientesService {
     }
 
     public enviarMensagemEscritorio(escritorio: Escritorio, mensagem: NovaMensagem): Observable<any> {
-        const url = environment.advogadosApi + '/escritorios/' + escritorio.codigo + '/mensagens';
+        const url = environment.advogadosApi + 'escritorios/mensagens/' + escritorio.codigo;
         return this.httpClient.post<any>(url, mensagem);
     }
 }
