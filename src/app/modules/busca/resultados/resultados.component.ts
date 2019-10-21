@@ -13,15 +13,15 @@ import { NovaMensagem } from 'src/app/shared/models/nova-mensagem.model';
   styleUrls: ['./resultados.component.scss']
 })
 export class ResultadosComponent implements OnInit {
-  protected tipoMapa: InlogMaps.MapType = InlogMaps.MapType.Google;
-  protected maps: InlogMaps.Map;
-  protected escritorios: Escritorio[];
-  protected escritorioSelecionado: Escritorio;
+  tipoMapa: InlogMaps.MapType = InlogMaps.MapType.Google;
+  maps: InlogMaps.Map;
+  escritorios: Escritorio[];
+  escritorioSelecionado: Escritorio;
 
-  protected novaMensagemNome: string;
-  protected novaMensagemCpf: string;
-  protected novaMensagemContato: string;
-  protected novaMensagemTexto: string;
+  novaMensagemNome: string;
+  novaMensagemCpf: string;
+  novaMensagemContato: string;
+  novaMensagemTexto: string;
 
   @ViewChild('templateEscritorio', { static: true })
   templateEscritorio: TemplateRef<any>;

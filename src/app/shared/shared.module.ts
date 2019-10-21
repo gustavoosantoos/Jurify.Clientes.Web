@@ -14,8 +14,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgxMaskModule, IConfig} from 'ngx-mask';
 
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
-
 @NgModule({
   declarations: [],
   imports: [
@@ -29,7 +27,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatDialogModule,
     FormsModule,
     HttpClientModule,
-    NgxMaskModule.forRoot(options),
+    NgxMaskModule.forRoot(),
     MatSnackBarModule
   ],
   exports: [
