@@ -89,6 +89,7 @@ export class ResultadosComponent implements OnInit {
 
   selecionarEspecialidade(codigo: string): void {
     if (codigo == null) {
+      this.especialidadeAtual = null;
       this.escritorios.forEach(e => this.maps.toggleMarkers(true, e.codigo));
     } else {
 
