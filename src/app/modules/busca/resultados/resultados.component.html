@@ -28,9 +28,8 @@
         <div>
             <strong>Especialidades:</strong>
             <ul>
-                <li>Civil</li>
-                <li>Trabalhista</li>
-                <li>Direito do Consumidor</li>
+                <li *ngIf="escritorioSelecionado.especialidades.length == 0">Não há especialidades informadas.</li>
+                <li *ngFor="let esp of escritorioSelecionado.especialidades">{{ esp.nome }}</li>
             </ul>
         </div>
     </div>
@@ -47,9 +46,8 @@
         <div>
             <strong>Especialidades:</strong>
             <ul>
-                <li>Civil</li>
-                <li>Trabalhista</li>
-                <li>Direito do Consumidor</li>
+                <li *ngIf="escritorioSelecionado.especialidades.length == 0">Não há especialidades informadas.</li>
+                <li *ngFor="let esp of escritorioSelecionado.especialidades">{{ esp.nome }}</li>
             </ul>
         </div>
     </div>
