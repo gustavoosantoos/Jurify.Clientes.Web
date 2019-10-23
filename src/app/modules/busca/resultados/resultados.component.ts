@@ -88,12 +88,17 @@ export class ResultadosComponent implements OnInit {
   }
 
   selecionarEspecialidade(codigo: string): void {
-    this.especialidadeAtual = this.especialidades.find(e => e.codigo === codigo);
-    this.escritorios.forEach(e => this.maps.toggleMarkers(false, e.codigo));
+    if (codigo == null) {
+      this.escritorios.forEach(e => this.maps.toggleMarkers(true, e.codigo));
+    } else {
 
-    this.escritorios
-        .filter(e => e.especialidades.some(es => es.codigo === codigo))
-        .forEach(e => this.maps.toggleMarkers(true, e.codigo));
+      this.especialidadeAtual = this.especialidades.find(e => e.codigo === codigo);
+      this.escritorios.forEach(e => this.maps.toggleMarkers(false, e.codigo));
+
+      this.escritorios
+          .filter(e => e.especialidades.some(es => es.codigo === codigo))
+          .forEach(e => this.maps.toggleMarkers(true, e.codigo));
+    }
   }
 
   plotarMarcadorUsuario(coordenadas: number[]): void {

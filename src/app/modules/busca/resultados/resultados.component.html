@@ -7,6 +7,7 @@
             <div class="filter-buttons">
                 <button mat-button [matMenuTriggerFor]="menu_esp">Especialidade</button>
                 <mat-menu #menu_esp="matMenu">
+                        <button mat-menu-item (click)="selecionarEspecialidade(null)">TODOS</button>
                     <button mat-menu-item *ngFor="let esp of especialidades" (click)="selecionarEspecialidade(esp.codigo)">{{ esp.nome }}</button>
                 </mat-menu>
             </div>
