@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Escritorio } from '../models/escritorio.model';
 import { NovaMensagem } from '../models/nova-mensagem.model';
+import { Especialidade } from '../models/especialidade.model';
 
 @Injectable({
     providedIn: 'root'
@@ -20,5 +21,9 @@ export class ClientesService {
     public enviarMensagemEscritorio(escritorio: Escritorio, mensagem: NovaMensagem): Observable<any> {
         const url = environment.advogadosApi + 'escritorios/mensagens/' + escritorio.codigo;
         return this.httpClient.post<any>(url, mensagem);
+    }
+
+    public obterEspecialidades(): Observable<Especialidade[]> {
+        return this.httpClient.get<Especialidade[]>(environment.autenticadorApi + 'advogados/specialties/listar-especialidades');
     }
 }

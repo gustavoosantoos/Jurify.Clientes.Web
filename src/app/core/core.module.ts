@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './components/menu/menu.component';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+import { MatProgressBarModule, MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material';
 
 
 
 @NgModule({
-  declarations: [MenuComponent],
+  declarations: [
+    LoadingScreenComponent,
+    MenuComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressSpinnerModule
   ],
   exports: [
-    MenuComponent
+    MenuComponent,
+    LoadingScreenComponent
   ]
 })
 export class CoreModule { }

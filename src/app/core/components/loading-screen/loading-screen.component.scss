@@ -1,0 +1,14 @@
+#global-progress-spinner {
+  position: fixed;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+
+  mat-progress-spinner {
+    position: absolute;
+    top: 40%;
+    left: 46%;
+  }
+}

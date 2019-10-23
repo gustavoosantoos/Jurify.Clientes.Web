@@ -1,3 +1,4 @@
+import { LoadingScreenService } from './../../../shared/services/loading-screen.service';
 import { logging } from 'protractor';
 import { Escritorio } from './../../../shared/models/escritorio.model';
 import { ClientesService } from './../../../shared/services/clientes.service';
@@ -6,6 +7,7 @@ import * as InlogMaps from '@inlog/inlog-maps/lib';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NovaMensagem } from 'src/app/shared/models/nova-mensagem.model';
+import { Especialidade } from 'src/app/shared/models/especialidade.model';
 
 @Component({
   selector: 'app-resultados',
@@ -15,6 +17,10 @@ import { NovaMensagem } from 'src/app/shared/models/nova-mensagem.model';
 export class ResultadosComponent implements OnInit {
   tipoMapa: InlogMaps.MapType = InlogMaps.MapType.Google;
   maps: InlogMaps.Map;
+
+  especialidades: Especialidade[];
+  especialidadeAtual: Especialidade;
+
   escritorios: Escritorio[];
   escritorioSelecionado: Escritorio;
 
@@ -37,7 +43,8 @@ export class ResultadosComponent implements OnInit {
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loadingService: LoadingScreenService
   ) { }
 
   ngOnInit() {
@@ -58,6 +65,12 @@ export class ResultadosComponent implements OnInit {
       this.maps.setZoom(12);
       this.plotarMarcadorUsuario([lat, lng]);
 
+      this.loadingService.isLoading.next(true);
+
+      this.clientesService.obterEspecialidades().subscribe(r => {
+        this.especialidades = r;
+      });
+
       this.clientesService.obterEscritorios().subscribe(r => {
         this.escritorios = r;
         this.escritorios.forEach(e => {
@@ -66,8 +79,21 @@ export class ResultadosComponent implements OnInit {
           this.adicionarHoverMarker(e);
           this.adicionarOutMarker(e);
         });
+      }, err => {
+        this.snackBar.open('Falha ao carregar escritórios', 'Fechar');
+      }, () => {
+        this.loadingService.isLoading.next(false);
       });
     });
+  }
+
+  selecionarEspecialidade(codigo: string): void {
+    this.especialidadeAtual = this.especialidades.find(e => e.codigo === codigo);
+    this.escritorios.forEach(e => this.maps.toggleMarkers(false, e.codigo));
+
+    this.escritorios
+        .filter(e => e.especialidades.some(es => es.codigo === codigo))
+        .forEach(e => this.maps.toggleMarkers(true, e.codigo));
   }
 
   plotarMarcadorUsuario(coordenadas: number[]): void {

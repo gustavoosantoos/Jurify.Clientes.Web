@@ -5,14 +5,10 @@
                 <!-- <button mat-button (click)="abrirModalCadastroCasoJuridico()">Cadastrar um caso jurídico</button> -->
             </div>
             <div class="filter-buttons">
-                <button mat-button>Distância</button>
                 <button mat-button [matMenuTriggerFor]="menu_esp">Especialidade</button>
                 <mat-menu #menu_esp="matMenu">
-                    <button mat-menu-item>Trabalhista</button>
-                    <button mat-menu-item>Família</button>
-                    <button mat-menu-item>Criminal</button>
+                    <button mat-menu-item *ngFor="let esp of especialidades" (click)="selecionarEspecialidade(esp.codigo)">{{ esp.nome }}</button>
                 </mat-menu>
-                <button mat-button>Avaliação</button>
             </div>
 
             <button class="filter-menu-btn" (click)="showButtons()" mat-icon-button title="Filtrar busca">
