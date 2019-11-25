@@ -23,6 +23,11 @@ export class ClientesService {
         return this.httpClient.post<any>(url, mensagem);
     }
 
+    public enviarMensagemPublica(mensagem: NovaMensagem): Observable<any> {
+      const url = environment.advogadosApi + 'mensagenspublicas';
+      return this.httpClient.post<any>(url, mensagem);
+    }
+
     public obterEspecialidades(): Observable<Especialidade[]> {
         return this.httpClient.get<Especialidade[]>(environment.autenticadorApi + 'advogados/specialties/listar-especialidades');
     }

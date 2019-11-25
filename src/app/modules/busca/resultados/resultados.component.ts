@@ -29,6 +29,11 @@ export class ResultadosComponent implements OnInit {
   novaMensagemContato: string;
   novaMensagemTexto: string;
 
+  novoCasoNome: string;
+  novoCasoCpf: string;
+  novoCasoContato: string;
+  novoCasoTexto: string;
+
   @ViewChild('templateEscritorio', { static: true })
   templateEscritorio: TemplateRef<any>;
 
@@ -208,8 +213,40 @@ export class ResultadosComponent implements OnInit {
     return true;
   }
 
-  abrirModalCadastroCasoJuridico(): void {
+  validarFormularioCasoJuridico(): boolean {
+    if (!this.novoCasoNome || !this.novoCasoCpf || !this.novoCasoContato || !this.novoCasoTexto) {
+      return false;
+    }
 
+    return true;
+  }
+
+  abrirModalCadastroCasoJuridico(): void {
+    this.dialog.open(this.templateCasoJuridico);
+  }
+
+  salvarCasoJuridico(): void {
+    if (!this.validarFormularioCasoJuridico()) {
+      this.snackBar.open('Preencha todos os campos do formulário', 'Fechar');
+      return;
+    }
+
+    const novaMensagem: NovaMensagem = {
+      nome: this.novoCasoNome,
+      cpf: this.novoCasoCpf,
+      contato: this.novoCasoContato,
+      mensagem: this.novoCasoTexto
+    };
+
+    this.loadingService.isLoading.next(true);
+    this.clientesService.enviarMensagemPublica(novaMensagem).subscribe(r => {
+      this.snackBar.open('Mensagem enviada com sucesso, aguarde o contato do escritório.', 'Fechar');
+    }, err => {
+      this.snackBar.open('Falha ao enviar mensagem, tente novamente.', 'Fechar');
+    }, () => {
+      this.dialog.closeAll();
+      this.loadingService.isLoading.next(false);
+    });
   }
 
   showButtons(): void {

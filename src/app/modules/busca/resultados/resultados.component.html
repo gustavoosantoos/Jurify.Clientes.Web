@@ -2,7 +2,7 @@
     <div class="container">
         <div class="filter-content">
             <div class="filter-buttons-left">
-                <!-- <button mat-button (click)="abrirModalCadastroCasoJuridico()">Cadastrar um caso jurídico</button> -->
+                <button mat-button (click)="abrirModalCadastroCasoJuridico()">Cadastrar um caso jurídico</button>
             </div>
             <div class="filter-buttons">
                 <button mat-button [matMenuTriggerFor]="menu_esp">{{ especialidadeAtual?.nome || 'Especialidades' }}</button>
@@ -23,21 +23,35 @@
 </div>
 
 <ng-template #templateCasoJuridico>
-    <h1 mat-dialog-title>{{ escritorioSelecionado.razaoSocial }}</h1>
-    <div mat-dialog-content>
-        <p><strong>Endereço: </strong>{{ escritorioSelecionado.endereco }}</p>
-        <div>
-            <strong>Especialidades:</strong>
-            <ul>
-                <li *ngIf="escritorioSelecionado.especialidades.length == 0">Não há especialidades informadas.</li>
-                <li *ngFor="let esp of escritorioSelecionado.especialidades">{{ esp.nome }}</li>
-            </ul>
-        </div>
-    </div>
-    <div mat-dialog-actions class="actions-container">
-        <button mat-button (click)="fecharModalEscritorio()">Fechar</button>
-        <button mat-button color="accent" (click)="abrirModalContatoEscritorio()" cdkFocusInitial>Enviar Mensagem</button>
-    </div>
+  <form (submit)="salvarCasoJuridico()">
+      <h1 mat-dialog-title>
+          <strong>Cadastrar uma mensagem:</strong>
+          <br/>
+          <small>Essa mensagem será pública para todos os escritórios cadastrados na plataforma</small>
+      </h1>
+      <div mat-dialog-content>
+          <p><strong>Suas informações pessoais: </strong></p>
+          <mat-form-field class="full-width">
+              <input matInput name="nome" placeholder="Nome Completo" [(ngModel)]="novoCasoNome" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+              <input matInput name="cpf" placeholder="CPF" mask="000.000.000-00" [(ngModel)]="novoCasoCpf" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+              <input matInput name="contato" type="email" placeholder="E-mail de contato" [(ngModel)]="novoCasoContato" required>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+              <textarea matInput name="texto" placeholder="Sua mensagem" [(ngModel)]="novoCasoTexto" required></textarea>
+          </mat-form-field>
+      </div>
+      <div mat-dialog-actions class="actions-container">
+          <button mat-button (click)="fecharModalMensagem()" type="button">Fechar</button>
+          <button mat-button color="accent" type="submit">Enviar Mensagem</button>
+      </div>
+  </form>
 </ng-template>
 
 <ng-template #templateEscritorio>
@@ -71,7 +85,7 @@
             <mat-form-field class="full-width">
                 <input matInput name="nome" placeholder="Nome Completo" [(ngModel)]="novaMensagemNome" required>
             </mat-form-field>
-                
+
             <mat-form-field class="full-width">
                 <input matInput name="cpf" placeholder="CPF" mask="000.000.000-00" [(ngModel)]="novaMensagemCpf" required>
             </mat-form-field>
