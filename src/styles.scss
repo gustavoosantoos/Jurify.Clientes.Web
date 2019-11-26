@@ -32,7 +32,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 0 auto;
 }
 
+.centered-content {
+    max-width: 600px;
+    margin: 0 auto;
 
+    img {
+        width: 100%;
+    }
+    
+    h2, p {
+        text-align: center;
+    }
+}
 
 mat-dialog-container {
     .actions-container {
