@@ -14,17 +14,17 @@ export class MensagensService {
   ) { }
 
   public aceitarAdvogado(codigo: string): Observable<string> {
-    const url = `$(this.baseUrl)/$(codigo)/aceitar`;
+    const url = `${this.baseUrl}/${codigo}/aceitar`;
     return this.http.post<string>(url, { });
   }
 
   public reativarMensagem(codigo: string): Observable<string> {
-    const url = `$(this.baseUrl)/$(codigo)/reativar`;
+    const url = `${this.baseUrl}/${codigo}/reativar`;
     return this.http.post<string>(url, { });
   }
 
   public removerMensagem(codigo: string): Observable<string> {
-    const url = `$(this.baseUrl)/$(codigo)`;
+    const url = `${this.baseUrl}/${codigo}`;
     return this.http.delete<string>(url, { });
   }
 }
